@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 interface IProps {
-  layout?: 'primary' | 'secondary';
+  layout?: 'primary' | 'secondary' | 'nightMode';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
 }
@@ -36,6 +36,15 @@ const props = withDefaults(defineProps<IProps>(), {
     color: var(--color-primary);
     background-color: var(--color-transparent);
     border-color: var(--color-primary);
+    cursor:grab;
+  }
+
+  &[data-layout='nightMode'] {
+    color: rgb(0, 0, 0);
+    background-color: gray;
+    border-color: black;
+    margin-left: 10px;
+    cursor: pointer;
   }
 }
 </style>
