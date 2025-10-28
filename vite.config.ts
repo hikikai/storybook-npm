@@ -15,19 +15,23 @@ const components = files.reduce<{ [key: string]: string }>((obj, component) => {
 }, {});
 
 export default defineConfig({
-  build: { 
-    target: 'es2022', 
-    copyPublicDir: false,         
-    lib: { 
-      name: 'storybook-and-npm-testing',     
-      entry: path.resolve('src/components/index.ts'), 
-      formats: ['es'], 
-      fileName: 'index', 
-    }, 
-    rollupOptions: { 
-      external: ['vue'], 
-      output: { globals: { vue: 'Vue' } }, 
-    }, 
+  build: {
+    target: 'es2022',
+    copyPublicDir: false,
+    cssCodeSplit: true,
+    lib: {
+      name: 'storybook-and-npm-testing',
+      entry: components,
+      formats: ['es'],
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: { vue: 'Vue' },
+        entryFileNames: `[name]/[name].js`,
+        assetFileNames: `[name]/[name].[ext]`,
+      },
+    },
   },
 
   plugins: [
